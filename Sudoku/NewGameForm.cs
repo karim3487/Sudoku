@@ -20,6 +20,7 @@ namespace Sudoku
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.Exit();
         }
 
         private void closeButton_MouseEnter(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace Sudoku
 
         private void startGame_Click(object sender, EventArgs e)
         {
-            Form1 game = new Form1();
+            
             var hintsCount = 0;
 
             // Assign the hints count based on the 
@@ -47,9 +48,9 @@ namespace Sudoku
                 hintsCount = 15;
             if (hintsCount != 0 && inputName.Text != "")
             {
+                Form1 game = new Form1(inputName.Text, hintsCount);
                 this.Hide();
                 game.Show();
-                game.startNewGame(hintsCount);
             }
             else
                 MessageBox.Show("Выберите уровень сложности и/или введите имя!");

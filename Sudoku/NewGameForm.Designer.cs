@@ -84,9 +84,8 @@
             // 
             this.inputName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.inputName.Location = new System.Drawing.Point(190, 126);
-            this.inputName.MaxLength = 17;
+            this.inputName.MaxLength = 10;
             this.inputName.Name = "inputName";
-            this.inputName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.inputName.Size = new System.Drawing.Size(205, 29);
             this.inputName.TabIndex = 2;
             this.inputName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -115,6 +114,7 @@
             // AdvancedLevel
             // 
             this.AdvancedLevel.AutoSize = true;
+            this.AdvancedLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AdvancedLevel.Location = new System.Drawing.Point(178, 247);
             this.AdvancedLevel.Margin = new System.Windows.Forms.Padding(2);
             this.AdvancedLevel.Name = "AdvancedLevel";
@@ -126,6 +126,7 @@
             // IntermediateLevel
             // 
             this.IntermediateLevel.AutoSize = true;
+            this.IntermediateLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IntermediateLevel.Location = new System.Drawing.Point(183, 226);
             this.IntermediateLevel.Margin = new System.Windows.Forms.Padding(2);
             this.IntermediateLevel.Name = "IntermediateLevel";
@@ -137,6 +138,7 @@
             // beginnerLevel
             // 
             this.beginnerLevel.AutoSize = true;
+            this.beginnerLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.beginnerLevel.Location = new System.Drawing.Point(192, 205);
             this.beginnerLevel.Margin = new System.Windows.Forms.Padding(2);
             this.beginnerLevel.Name = "beginnerLevel";
@@ -222,7 +224,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label closeButton;
-        private System.Windows.Forms.TextBox inputName;
+        public System.Windows.Forms.TextBox inputName;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton AdvancedLevel;

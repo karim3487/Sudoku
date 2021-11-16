@@ -11,7 +11,7 @@ namespace Sudoku
 {
     public partial class Form1 : Form
     {
-        bool isActive = false;
+        private bool isActive = false, error_prevention = false;
         private int s, m, h, ms;
         private string playerName;
         private int flagForNameFile;
@@ -36,6 +36,8 @@ namespace Sudoku
 
         private void createCells()
         {
+            var firstColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(212)))), ((int)(((byte)(113)))));
+            var secondColor = Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(194)))), ((int)(((byte)(79)))));
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -46,7 +48,7 @@ namespace Sudoku
                     cells[i, j].Size = new Size(50, 50);
                     cells[i, j].ForeColor = SystemColors.ControlDarkDark;
                     cells[i, j].Location = new Point(i * 50, j * 50);
-                    cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? Color.Khaki : Color.SandyBrown;
+                    cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? firstColor : secondColor;
                     cells[i, j].FlatStyle = FlatStyle.Flat;
                     cells[i, j].FlatAppearance.BorderColor = Color.Black;
                     cells[i, j].X = i;
@@ -74,12 +76,26 @@ namespace Sudoku
             if (int.TryParse(e.KeyChar.ToString(), out value))
             {
                 // Очищаем ячейку если нажат 0
-                if (value == 0)
-                    cell.Clear();
-                else
-                    cell.Text = value.ToString();
+                if (error_prevention)
+                {
+                    if (value == 0)
+                        cell.Clear();
+                    else if (string.Equals(cell.Value.ToString(), value.ToString()))
+                    {
+                        cell.Text = value.ToString();
+                        cell.ForeColor = Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(79)))), ((int)(((byte)(194))))); ;
+                    }
 
-                cell.ForeColor = SystemColors.ControlDarkDark;
+                }
+                else
+                {
+                    if (value == 0)
+                        cell.Clear();
+                    else
+                        cell.Text = value.ToString();
+
+                    cell.ForeColor = SystemColors.ControlDarkDark;
+                }
             }
         }
 
@@ -207,7 +223,6 @@ namespace Sudoku
             // Проверяем, есть ли ошибки
             if (wrongCells.Any())
             {
-                string fileName;
                 // Выделяем неправильные цифры
                 wrongCells.ForEach(x => x.ForeColor = Color.Red);
                 //MessageBox.Show("Неправильно!!!");
@@ -282,6 +297,14 @@ namespace Sudoku
                 }
             }
             txtTimer.Text = String.Format("{0}:{1}:{2}.{3}", h.ToString().PadLeft(2, '0'), m.ToString().PadLeft(2, '0'), s.ToString().PadLeft(2, '0'), ms.ToString().PadLeft(2, '0'));
+        }
+
+        private void errorPreventionMode_Click(object sender, EventArgs e)
+        {
+            if (errorPreventionMode.Checked)
+                error_prevention = true;
+            else
+                error_prevention = false;
         }
 
         private void closeButton_Click(object sender, EventArgs e)

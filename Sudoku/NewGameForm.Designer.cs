@@ -37,7 +37,6 @@
             this.AdvancedLevel = new System.Windows.Forms.RadioButton();
             this.IntermediateLevel = new System.Windows.Forms.RadioButton();
             this.beginnerLevel = new System.Windows.Forms.RadioButton();
-            this.errorPreventionMode = new System.Windows.Forms.CheckBox();
             this.startGame = new System.Windows.Forms.Button();
             this.recordsButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -148,16 +147,6 @@
             this.beginnerLevel.Text = "Новичок";
             this.beginnerLevel.UseVisualStyleBackColor = true;
             // 
-            // errorPreventionMode
-            // 
-            this.errorPreventionMode.AutoSize = true;
-            this.errorPreventionMode.Location = new System.Drawing.Point(132, 286);
-            this.errorPreventionMode.Name = "errorPreventionMode";
-            this.errorPreventionMode.Size = new System.Drawing.Size(191, 17);
-            this.errorPreventionMode.TabIndex = 9;
-            this.errorPreventionMode.Text = "Режим предотвращения ошибок";
-            this.errorPreventionMode.UseVisualStyleBackColor = true;
-            // 
             // startGame
             // 
             this.startGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(210)))), ((int)(((byte)(81)))));
@@ -199,7 +188,6 @@
             this.ClientSize = new System.Drawing.Size(448, 454);
             this.Controls.Add(this.recordsButton);
             this.Controls.Add(this.startGame);
-            this.Controls.Add(this.errorPreventionMode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AdvancedLevel);
             this.Controls.Add(this.IntermediateLevel);
@@ -230,7 +218,6 @@
         private System.Windows.Forms.RadioButton AdvancedLevel;
         private System.Windows.Forms.RadioButton IntermediateLevel;
         private System.Windows.Forms.RadioButton beginnerLevel;
-        private System.Windows.Forms.CheckBox errorPreventionMode;
         public System.Windows.Forms.Button startGame;
         public System.Windows.Forms.Button recordsButton;
     }

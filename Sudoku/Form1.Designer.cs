@@ -37,6 +37,7 @@
             this.txtTimer = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.errorPreventionMode = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -44,7 +45,7 @@
             this.panel1.Location = new System.Drawing.Point(29, 28);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(450, 450);
+            this.panel1.Size = new System.Drawing.Size(490, 490);
             this.panel1.TabIndex = 0;
             // 
             // newGameButton
@@ -54,7 +55,7 @@
             this.newGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newGameButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newGameButton.ForeColor = System.Drawing.Color.White;
-            this.newGameButton.Location = new System.Drawing.Point(509, 410);
+            this.newGameButton.Location = new System.Drawing.Point(556, 410);
             this.newGameButton.Margin = new System.Windows.Forms.Padding(2);
             this.newGameButton.Name = "newGameButton";
             this.newGameButton.Size = new System.Drawing.Size(119, 67);
@@ -70,7 +71,7 @@
             this.checkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkButton.ForeColor = System.Drawing.Color.White;
-            this.checkButton.Location = new System.Drawing.Point(509, 28);
+            this.checkButton.Location = new System.Drawing.Point(556, 28);
             this.checkButton.Margin = new System.Windows.Forms.Padding(2);
             this.checkButton.Name = "checkButton";
             this.checkButton.Size = new System.Drawing.Size(119, 65);
@@ -86,7 +87,7 @@
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.ForeColor = System.Drawing.Color.White;
-            this.clearButton.Location = new System.Drawing.Point(509, 104);
+            this.clearButton.Location = new System.Drawing.Point(556, 104);
             this.clearButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(119, 38);
@@ -101,7 +102,7 @@
             this.closeButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.closeButton.Location = new System.Drawing.Point(635, 0);
+            this.closeButton.Location = new System.Drawing.Point(700, 1);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(28, 26);
             this.closeButton.TabIndex = 5;
@@ -115,7 +116,7 @@
             this.txtTimer.BackColor = System.Drawing.SystemColors.Control;
             this.txtTimer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtTimer.Location = new System.Drawing.Point(27, 480);
+            this.txtTimer.Location = new System.Drawing.Point(27, 520);
             this.txtTimer.Name = "txtTimer";
             this.txtTimer.ReadOnly = true;
             this.txtTimer.Size = new System.Drawing.Size(117, 25);
@@ -131,20 +132,31 @@
             // 
             // errorPreventionMode
             // 
-            this.errorPreventionMode.AutoSize = true;
-            this.errorPreventionMode.Location = new System.Drawing.Point(158, 485);
+            this.errorPreventionMode.Location = new System.Drawing.Point(158, 525);
             this.errorPreventionMode.Name = "errorPreventionMode";
-            this.errorPreventionMode.Size = new System.Drawing.Size(191, 17);
+            this.errorPreventionMode.Size = new System.Drawing.Size(570, 17);
             this.errorPreventionMode.TabIndex = 10;
             this.errorPreventionMode.Text = "Режим предотвращения ошибок";
             this.errorPreventionMode.UseVisualStyleBackColor = true;
             this.errorPreventionMode.Click += new System.EventHandler(this.errorPreventionMode_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(565, 244);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 517);
+            this.ClientSize = new System.Drawing.Size(729, 550);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.errorPreventionMode);
             this.Controls.Add(this.txtTimer);
             this.Controls.Add(this.closeButton);
@@ -174,5 +186,6 @@
         private System.Windows.Forms.TextBox txtTimer;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.CheckBox errorPreventionMode;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

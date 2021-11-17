@@ -11,7 +11,7 @@ namespace Sudoku
 {
     public partial class Form1 : Form
     {
-        private bool isActive = false, error_prevention = false;
+        private bool isActive = false, error_prevention = false, notes = false;
         private int s, m, h, ms;
         private string playerName;
         private int flagForNameFile;
@@ -32,12 +32,14 @@ namespace Sudoku
 
         SudokuCell[,] cells = new SudokuCell[9, 9];
 
+        ValuesLabel[,] values = new ValuesLabel[3, 3];
+
         Records records = new Records();
 
         private void createCells()
         {
-            var firstColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(212)))), ((int)(((byte)(113)))));
-            var secondColor = Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(194)))), ((int)(((byte)(79)))));
+            var firstColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(222)))), ((int)(((byte)(99)))));
+            var secondColor = Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(255)))), ((int)(((byte)(99)))));
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -45,15 +47,14 @@ namespace Sudoku
                     // Создаем 81 ячейку со стилями и местоположениями на основе индекса
                     cells[i, j] = new SudokuCell();
                     cells[i, j].Font = new Font(SystemFonts.DefaultFont.FontFamily, 25);
-                    cells[i, j].Size = new Size(50, 50);
+                    cells[i, j].Size = new Size(51, 51);
                     cells[i, j].ForeColor = SystemColors.ControlDarkDark;
-                    cells[i, j].Location = new Point(i * 50, j * 50);
+                    cells[i, j].Location = new Point(i * 51, j * 51);
                     cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? firstColor : secondColor;
                     cells[i, j].FlatStyle = FlatStyle.Flat;
                     cells[i, j].FlatAppearance.BorderColor = Color.Black;
                     cells[i, j].X = i;
                     cells[i, j].Y = j;
-
                     // Назначаем событие нажатия клавиши для каждой ячейки
                     cells[i, j].KeyPress += cell_keyPressed;
 
@@ -69,11 +70,23 @@ namespace Sudoku
             // Ничего не делать, если ячейка заблокирована
             if (cell.IsLocked)
                 return;
+            //if(notes)
+              //  cell.Hide();
 
             int value;
+            bool checkValidInput = int.TryParse(e.KeyChar.ToString(), out value);
+            bool isHidden = false;
+            int i = 0;
+            Label[] listLabel = new Label[9];
+            foreach (Label l in cell.Controls.OfType<Label>())
+            {
+                listLabel[i] = l;
+                //l.ForeColor = Color.Black;
+                i++;
+            }
 
             // Добавляем в ячейку значение нажатой клавиши, только если это число
-            if (int.TryParse(e.KeyChar.ToString(), out value))
+            if (checkValidInput)
             {
                 // Очищаем ячейку если нажат 0
                 if (error_prevention)
@@ -83,18 +96,36 @@ namespace Sudoku
                     else if (string.Equals(cell.Value.ToString(), value.ToString()))
                     {
                         cell.Text = value.ToString();
-                        cell.ForeColor = Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(79)))), ((int)(((byte)(194))))); ;
+                        cell.ForeColor = Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(79)))), ((int)(((byte)(194)))));
+                        for (int notes = 0; notes < 9; notes++)
+                            listLabel[notes].Text = "";
                     }
-
+                    MessageBox.Show(listLabel[1].ForeColor.ToString());
                 }
                 else
                 {
-                    if (value == 0)
-                        cell.Clear();
+                    if (notes)
+                    {
+                        if (cell.Text == "")
+                        {
+                            if (listLabel[value - 1].Text == "")
+                                listLabel[value - 1].Text = value.ToString();
+                            else
+                                listLabel[value - 1].Text = "";
+                        }
+                    }
                     else
-                        cell.Text = value.ToString();
-
-                    cell.ForeColor = SystemColors.ControlDarkDark;
+                    {
+                        if (value == 0)
+                            cell.Clear();
+                        else
+                        {
+                            cell.Text = value.ToString();
+                            for (int notes = 0; notes < 9; notes++)
+                                listLabel[notes].Text = "";
+                        }
+                        cell.ForeColor = SystemColors.ControlDarkDark;
+                    }
                 }
             }
         }
@@ -122,6 +153,37 @@ namespace Sudoku
                 cells[rX, rY].Text = cells[rX, rY].Value.ToString();
                 cells[rX, rY].ForeColor = Color.Black;
                 cells[rX, rY].IsLocked = true;
+            }
+            initNotes(); // загружаем заметки для ячеек, которые !IsLocked
+        }
+
+        private void initNotes()
+        {
+            // В цикле пробегаемся по каждой ячейке поля, если она !IsLocked загружаем в нее 9 лейблов для заметок
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        for (int l = 0; l < 3; l++)
+                        {
+                            if (!cells[i, j].IsLocked)
+                            {
+                                values[k, l] = new ValuesLabel();
+                                values[k, l].Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                                values[k, l].Size = new Size(17, 17);
+                                values[k, l].Location = new Point(k * 17, l * 17);
+                                /*values[k, l].Text = values[k, l].array[l, k].ToString();*/
+                                values[k, l].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                                values[k, l].Enabled = false;
+                                values[k, l].ForeColor = System.Drawing.SystemColors.ControlText;
+                                values[k, l].BackColor = Color.Transparent;
+                                cells[i, j].Controls.Add(values[k, l]);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -297,6 +359,14 @@ namespace Sudoku
                 }
             }
             txtTimer.Text = String.Format("{0}:{1}:{2}.{3}", h.ToString().PadLeft(2, '0'), m.ToString().PadLeft(2, '0'), s.ToString().PadLeft(2, '0'), ms.ToString().PadLeft(2, '0'));
+        }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+                notes = true;
+            else
+                notes = false;
         }
 
         private void errorPreventionMode_Click(object sender, EventArgs e)

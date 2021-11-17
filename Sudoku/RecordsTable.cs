@@ -67,8 +67,11 @@ namespace Sudoku
             {
                 foreach (var record in records)
                 {
-                    cells[coll, row].Text = record.Value;
-                    cells[coll + 1, row].Text = record.Key;
+                    if (row < 11)
+                    {
+                        cells[coll, row].Text = record.Value;
+                        cells[coll + 1, row].Text = record.Key;
+                    }
                     row++;
                 }
             }

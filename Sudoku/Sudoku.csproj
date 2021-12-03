@@ -70,6 +70,11 @@
     <Compile Include="RecordsTable.Designer.cs">
       <DependentUpon>RecordsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="SudokuCell.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -91,6 +96,10 @@
     <EmbeddedResource Include="RecordsTable.resx">
       <DependentUpon>RecordsTable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -104,6 +113,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\klipartz.com %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SUDOKU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JPEG_example_down.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1621611168_12-phonoteka_org-p-fon-tsifri-dlya-detei-12.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1612739736_116-p-goluboi-fon-tsifri-209.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backTest.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

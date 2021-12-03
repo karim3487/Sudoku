@@ -44,16 +44,12 @@ namespace Sudoku
                 foreach (var pair in records)
                 {
                     var key = pair.Key.Replace(":", "");
-                    key = key.Replace("0", "");
                     key = key.Replace(".", "");
                     var integerKey = Int32.Parse(key);
                     integerRec.Add(integerKey, pair);
                 }
                 foreach (var pair in integerRec.OrderBy(pair => pair.Key))
-                {
-                    Console.WriteLine("{0} - {1}", pair.Value.Key, pair.Value.Value);
                     assortedRecords.Add(pair.Value.Key, pair.Value.Value);
-                }
             }
             else
             {

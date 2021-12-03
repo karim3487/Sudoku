@@ -12,6 +12,9 @@ namespace Sudoku
 {
     public partial class NewGameForm : Form
     {
+        public Bitmap Logo = Resource1.SUDOKU;
+
+
         public NewGameForm()
         {
             InitializeComponent();
@@ -60,6 +63,13 @@ namespace Sudoku
         {
             RecordsTable records = new RecordsTable();
             records.Show();
+        }
+
+        private void NewGameForm_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            g.DrawImage(Logo, new Rectangle(Width / 2 - 160, 28, 320, 72));
         }
     }
 }

@@ -25,6 +25,12 @@ namespace Sudoku
 
         public int[,] array = { { 1, 4, 7 }, { 2, 5, 8 }, { 3, 6, 9 } };
 
+        new bool Enabled { 
+            set
+            {
+                this.ForeColor = System.Drawing.Color.Green;
+            } 
+        }
         public void Clear()
         {
             this.Text = string.Empty;

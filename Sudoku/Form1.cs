@@ -21,6 +21,8 @@ namespace Sudoku
 
             createCells();
 
+            //changeBackColor();
+
             startNewGame(hintsCount);
 
             this.playerName = playerName;
@@ -38,7 +40,7 @@ namespace Sudoku
 
         private void createCells()
         {
-            var firstColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(222)))), ((int)(((byte)(99)))));
+            var firstColor = Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(249)))), ((int)(((byte)(187)))));
             var secondColor = Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(255)))), ((int)(((byte)(99)))));
             for (int i = 0; i < 9; i++)
             {
@@ -50,7 +52,7 @@ namespace Sudoku
                     cells[i, j].Size = new Size(51, 51);
                     cells[i, j].ForeColor = SystemColors.ControlDarkDark;
                     cells[i, j].Location = new Point(i * 51, j * 51);
-                    cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? firstColor : secondColor;
+                    cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? firstColor : Color.White;
                     cells[i, j].FlatStyle = FlatStyle.Flat;
                     cells[i, j].FlatAppearance.BorderColor = Color.Black;
                     cells[i, j].X = i;
@@ -75,13 +77,14 @@ namespace Sudoku
 
             int value;
             bool checkValidInput = int.TryParse(e.KeyChar.ToString(), out value);
-            bool isHidden = false;
+            //bool isHidden = false;
             int i = 0;
             Label[] listLabel = new Label[9];
             foreach (Label l in cell.Controls.OfType<Label>())
             {
                 listLabel[i] = l;
-                //l.ForeColor = Color.Black;
+                //l.MouseEnter += (Label[,], MouseEnter) => cells_MouseEnter(cell);
+                l.MouseEnter += new System.EventHandler(cells_MouseEnter); ;
                 i++;
             }
 
@@ -96,11 +99,11 @@ namespace Sudoku
                     else if (string.Equals(cell.Value.ToString(), value.ToString()))
                     {
                         cell.Text = value.ToString();
-                        cell.ForeColor = Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(79)))), ((int)(((byte)(194)))));
+                        cell.ForeColor = Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(47)))), ((int)(((byte)(175)))));
                         for (int notes = 0; notes < 9; notes++)
                             listLabel[notes].Text = "";
+                        
                     }
-                    MessageBox.Show(listLabel[1].ForeColor.ToString());
                 }
                 else
                 {
@@ -124,7 +127,7 @@ namespace Sudoku
                             for (int notes = 0; notes < 9; notes++)
                                 listLabel[notes].Text = "";
                         }
-                        cell.ForeColor = SystemColors.ControlDarkDark;
+                        cell.ForeColor = Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
                     }
                 }
             }
@@ -157,6 +160,12 @@ namespace Sudoku
             initNotes(); // загружаем заметки для ячеек, которые !IsLocked
         }
 
+        private void changeBackColor()
+        {
+            txtTimer.BackColor = Color.Transparent;
+            checkBox1.BackColor = Color.Transparent;
+        }
+
         private void initNotes()
         {
             // В цикле пробегаемся по каждой ячейке поля, если она !IsLocked загружаем в нее 9 лейблов для заметок
@@ -179,7 +188,8 @@ namespace Sudoku
                                 values[k, l].Enabled = false;
                                 values[k, l].ForeColor = System.Drawing.SystemColors.ControlText;
                                 values[k, l].BackColor = Color.Transparent;
-                                cells[i, j].Controls.Add(values[k, l]);
+                                cells[i, j].Controls.Add(values[l, k]);
+                                
                             }
                         }
                     }
@@ -364,17 +374,29 @@ namespace Sudoku
         private void checkBox1_Click(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
+            {
                 notes = true;
+                checkBox1.BackColor = Color.GreenYellow;
+            }
             else
+            {
                 notes = false;
+                checkBox1.BackColor = SystemColors.ButtonFace;
+            }
         }
 
         private void errorPreventionMode_Click(object sender, EventArgs e)
         {
             if (errorPreventionMode.Checked)
+            {
                 error_prevention = true;
+                errorPreventionMode.BackColor = Color.GreenYellow;
+            }
             else
+            {
                 error_prevention = false;
+                errorPreventionMode.BackColor = SystemColors.ButtonFace;
+            }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -382,6 +404,22 @@ namespace Sudoku
             resetTimer();
             Application.DoEvents();
             Application.Exit();
+        }
+
+        private void cells_MouseEnter(object sender, EventArgs e)
+        {
+            foreach (Label l in cells[1, 1].Controls.OfType<Label>())
+            {
+                l.BackColor = Color.Black;
+            }
+            values[1, 1].BackColor = Color.Red;
+            /*for (int k = 0; k < 3; k++)
+            {
+                for (int l = 0; l < 3; l++)
+                {
+                    values[k, l].
+                }
+            }*/
         }
 
         private void closeButton_MouseEnter(object sender, EventArgs e)

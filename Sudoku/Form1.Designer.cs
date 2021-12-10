@@ -41,7 +41,9 @@ namespace Sudoku
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.errorPreventionMode = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.soundtrack = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.soundtrack)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -167,16 +169,23 @@ namespace Sudoku
             this.checkBox1.UseVisualStyleBackColor = false;
             this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
             // 
-            // checkBox2
+            // splitter1
             // 
-            this.checkBox2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(548, 274);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(71, 23);
-            this.checkBox2.TabIndex = 12;
-            this.checkBox2.Text = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 543);
+            this.splitter1.TabIndex = 12;
+            this.splitter1.TabStop = false;
+            // 
+            // soundtrack
+            // 
+            this.soundtrack.Enabled = true;
+            this.soundtrack.Location = new System.Drawing.Point(536, 502);
+            this.soundtrack.Name = "soundtrack";
+            this.soundtrack.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("soundtrack.OcxState")));
+            this.soundtrack.Size = new System.Drawing.Size(75, 23);
+            this.soundtrack.TabIndex = 13;
+            this.soundtrack.Visible = false;
             // 
             // Form1
             // 
@@ -184,7 +193,8 @@ namespace Sudoku
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Sudoku.Resource1.backTest;
             this.ClientSize = new System.Drawing.Size(663, 543);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.soundtrack);
+            this.Controls.Add(this.splitter1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.errorPreventionMode);
             this.Controls.Add(this.txtTimer);
@@ -201,6 +211,7 @@ namespace Sudoku
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sudoku";
+            ((System.ComponentModel.ISupportInitialize)(this.soundtrack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,6 +228,7 @@ namespace Sudoku
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.CheckBox errorPreventionMode;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Splitter splitter1;
+        private AxWMPLib.AxWindowsMediaPlayer soundtrack;
     }
 }

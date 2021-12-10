@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -97,6 +98,8 @@ namespace Sudoku
 
         private void closeButton_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+
             this.Close();
         }
 
@@ -112,9 +115,17 @@ namespace Sudoku
 
         private void clearRecords_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+
             records.clearFiles();
             this.Close();
             MessageBox.Show("Рекорды успешно очищены!");
+        }
+
+        private void playSimpleSound(string filename)
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\" + filename);
+            simpleSound.Play();
         }
     }
 }

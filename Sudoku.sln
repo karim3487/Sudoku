@@ -8,13 +8,25 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Sudoku|Any CPU = Sudoku|Any CPU
+		Sudoku|x64 = Sudoku|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Debug|x64.ActiveCfg = Debug|x64
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Debug|x64.Build.0 = Debug|x64
 		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Release|x64.ActiveCfg = Release|x64
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Release|x64.Build.0 = Release|x64
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Sudoku|Any CPU.ActiveCfg = Sudoku|Any CPU
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Sudoku|Any CPU.Build.0 = Sudoku|Any CPU
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Sudoku|x64.ActiveCfg = Sudoku|x64
+		{6B4291EA-8999-48C5-AF6D-178FFD64CC92}.Sudoku|x64.Build.0 = Sudoku|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Timers;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Sudoku
@@ -21,7 +19,7 @@ namespace Sudoku
 
             createCells();
 
-            //changeBackColor();
+            playSoundtrack(true);
 
             startNewGame(hintsCount);
 
@@ -72,18 +70,14 @@ namespace Sudoku
             // Ничего не делать, если ячейка заблокирована
             if (cell.IsLocked)
                 return;
-            //if(notes)
-              //  cell.Hide();
 
             int value;
             bool checkValidInput = int.TryParse(e.KeyChar.ToString(), out value);
-            //bool isHidden = false;
             int i = 0;
             Label[] listLabel = new Label[9];
             foreach (Label l in cell.Controls.OfType<Label>())
             {
                 listLabel[i] = l;
-                //l.MouseEnter += (Label[,], MouseEnter) => cells_MouseEnter(cell);
                 l.MouseEnter += new System.EventHandler(cells_MouseEnter); ;
                 i++;
             }
@@ -160,12 +154,6 @@ namespace Sudoku
             initNotes(); // загружаем заметки для ячеек, которые !IsLocked
         }
 
-        private void changeBackColor()
-        {
-            txtTimer.BackColor = Color.Transparent;
-            checkBox1.BackColor = Color.Transparent;
-        }
-
         private void initNotes()
         {
             // В цикле пробегаемся по каждой ячейке поля, если она !IsLocked загружаем в нее 9 лейблов для заметок
@@ -183,13 +171,11 @@ namespace Sudoku
                                 values[k, l].Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                                 values[k, l].Size = new Size(17, 17);
                                 values[k, l].Location = new Point(k * 17, l * 17);
-                                /*values[k, l].Text = values[k, l].array[l, k].ToString();*/
                                 values[k, l].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                                 values[k, l].Enabled = false;
                                 values[k, l].ForeColor = System.Drawing.SystemColors.ControlText;
                                 values[k, l].BackColor = Color.Transparent;
                                 cells[i, j].Controls.Add(values[l, k]);
-                                
                             }
                         }
                     }
@@ -281,6 +267,8 @@ namespace Sudoku
 
         private void checkButton_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+
             var wrongCells = new List<SudokuCell>();
 
             // Ищем все неправильные числа, которые ввел пользователь
@@ -298,13 +286,17 @@ namespace Sudoku
                 // Выделяем неправильные цифры
                 wrongCells.ForEach(x => x.ForeColor = Color.Red);
                 //MessageBox.Show("Неправильно!!!");
+                //playSimpleSound("Windows Background.wav");
                 // --------------для теста-----------
+                //playSoundtrack(false);
+                playSimpleSound("tada.wav");
                 MessageBox.Show($"{playerName}, Вы победили!\nВаше время: {txtTimer.Text}");
                 setRecord();
                 // --------------для теста-----------
             }
             else
-            {   
+            {
+                playSoundtrack(false);
                 this.Hide();
                 startingTheGame.Show();
                 resetTimer();
@@ -322,11 +314,18 @@ namespace Sudoku
 
         private void clearButton_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
             foreach (var cell in cells)
             {
                 // Очищаем ячейку, только если она не заблокирована
                 if (cell.IsLocked == false)
+                {
                     cell.Clear();
+                    foreach (Label l in cell.Controls.OfType<Label>())
+                    {
+                        l.Text = "";
+                    }
+                }
             }
         }
 
@@ -342,6 +341,9 @@ namespace Sudoku
 
         private void newGameButton_Click(object sender, EventArgs e)
         {
+            playSoundtrack(false);
+            playSimpleSound("Windows Navigation Start.wav");
+
             this.Hide();
             startingTheGame.Show();
             resetTimer();
@@ -373,6 +375,8 @@ namespace Sudoku
 
         private void checkBox1_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+
             if (checkBox1.Checked)
             {
                 notes = true;
@@ -387,6 +391,8 @@ namespace Sudoku
 
         private void errorPreventionMode_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+
             if (errorPreventionMode.Checked)
             {
                 error_prevention = true;
@@ -401,6 +407,9 @@ namespace Sudoku
 
         private void closeButton_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+            playSoundtrack(false);
+
             resetTimer();
             Application.DoEvents();
             Application.Exit();
@@ -413,13 +422,6 @@ namespace Sudoku
                 l.BackColor = Color.Black;
             }
             values[1, 1].BackColor = Color.Red;
-            /*for (int k = 0; k < 3; k++)
-            {
-                for (int l = 0; l < 3; l++)
-                {
-                    values[k, l].
-                }
-            }*/
         }
 
         private void closeButton_MouseEnter(object sender, EventArgs e)
@@ -430,6 +432,27 @@ namespace Sudoku
         private void closeButton_MouseLeave(object sender, EventArgs e)
         {
             closeButton.ForeColor = Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+        }
+
+        private void playSimpleSound(string filename)
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\" + filename);
+            simpleSound.Play();
+        }
+
+        private void playSoundtrack(bool flag)
+        {
+            if (flag)
+            {
+                soundtrack.URL = "soundtrack.mp3";
+                soundtrack.settings.setMode("loop", true);
+                soundtrack.settings.volume = 2;
+                soundtrack.Ctlcontrols.play();
+            }
+            else
+            {
+                soundtrack.Ctlcontrols.stop();
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +23,8 @@ namespace Sudoku
 
         private void closeButton_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+
             this.Close();
             Application.Exit();
         }
@@ -38,7 +41,8 @@ namespace Sudoku
 
         private void startGame_Click(object sender, EventArgs e)
         {
-            
+            playSimpleSound("Windows Navigation Start.wav");
+
             var hintsCount = 0;
 
             // Assign the hints count based on the 
@@ -56,11 +60,16 @@ namespace Sudoku
                 game.Show();
             }
             else
+            {
+                playSimpleSound("Windows Background.wav");
                 MessageBox.Show("Выберите уровень сложности и/или введите имя!");
+            }
         }
 
         private void recordsButton_Click(object sender, EventArgs e)
         {
+            playSimpleSound("Windows Navigation Start.wav");
+
             RecordsTable records = new RecordsTable();
             records.Show();
         }
@@ -70,6 +79,12 @@ namespace Sudoku
             Graphics g = e.Graphics;
 
             g.DrawImage(Logo, new Rectangle(Width / 2 - 160, 28, 320, 72));
+        }
+
+        private void playSimpleSound(string filename)
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\" + filename);
+            simpleSound.Play();
         }
     }
 }

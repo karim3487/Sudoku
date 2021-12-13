@@ -44,9 +44,11 @@ namespace Sudoku
             playSimpleSound("Windows Navigation Start.wav");
 
             var hintsCount = 0;
-
-            // Assign the hints count based on the 
-            // level player chosen
+            var mode = "";
+            if (this.classic_mode.Checked)
+                mode = "classic";
+            else if (this.even_odd_mode.Checked)
+                mode = "even_odd";
             if (this.beginnerLevel.Checked)
                 hintsCount = 45;
             else if (this.IntermediateLevel.Checked)
@@ -55,7 +57,7 @@ namespace Sudoku
                 hintsCount = 15;
             if (hintsCount != 0 && inputName.Text != "")
             {
-                Form1 game = new Form1(inputName.Text, hintsCount);
+                Form1 game = new Form1(inputName.Text, hintsCount, mode);
                 this.Hide();
                 game.Show();
             }

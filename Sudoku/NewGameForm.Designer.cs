@@ -31,20 +31,25 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewGameForm));
             this.inputName = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.AdvancedLevel = new System.Windows.Forms.RadioButton();
             this.IntermediateLevel = new System.Windows.Forms.RadioButton();
             this.beginnerLevel = new System.Windows.Forms.RadioButton();
             this.startGame = new System.Windows.Forms.Button();
             this.recordsButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Label();
+            this.classic_mode = new System.Windows.Forms.RadioButton();
+            this.even_odd_mode = new System.Windows.Forms.RadioButton();
+            this.Mode = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Mode.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // inputName
             // 
             this.inputName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.inputName.Font = new System.Drawing.Font("Rubik", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.inputName.Location = new System.Drawing.Point(63, 141);
+            this.inputName.Location = new System.Drawing.Point(63, 231);
             this.inputName.MaxLength = 10;
             this.inputName.Name = "inputName";
             this.inputName.Size = new System.Drawing.Size(201, 30);
@@ -55,29 +60,18 @@
             // 
             this.nameLabel.AutoSize = true;
             this.nameLabel.Font = new System.Drawing.Font("Rubik", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nameLabel.Location = new System.Drawing.Point(73, 106);
+            this.nameLabel.Location = new System.Drawing.Point(73, 196);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(184, 33);
             this.nameLabel.TabIndex = 4;
             this.nameLabel.Text = "Введите имя:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Rubik", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(116, 190);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 27);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Уровень";
             // 
             // AdvancedLevel
             // 
             this.AdvancedLevel.AutoSize = true;
             this.AdvancedLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AdvancedLevel.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AdvancedLevel.Location = new System.Drawing.Point(97, 261);
+            this.AdvancedLevel.Location = new System.Drawing.Point(29, 67);
             this.AdvancedLevel.Margin = new System.Windows.Forms.Padding(2);
             this.AdvancedLevel.Name = "AdvancedLevel";
             this.AdvancedLevel.Size = new System.Drawing.Size(142, 23);
@@ -90,7 +84,7 @@
             this.IntermediateLevel.AutoSize = true;
             this.IntermediateLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IntermediateLevel.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.IntermediateLevel.Location = new System.Drawing.Point(103, 238);
+            this.IntermediateLevel.Location = new System.Drawing.Point(35, 44);
             this.IntermediateLevel.Margin = new System.Windows.Forms.Padding(2);
             this.IntermediateLevel.Name = "IntermediateLevel";
             this.IntermediateLevel.Size = new System.Drawing.Size(131, 23);
@@ -103,12 +97,11 @@
             this.beginnerLevel.AutoSize = true;
             this.beginnerLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.beginnerLevel.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.beginnerLevel.Location = new System.Drawing.Point(123, 217);
+            this.beginnerLevel.Location = new System.Drawing.Point(55, 23);
             this.beginnerLevel.Margin = new System.Windows.Forms.Padding(2);
             this.beginnerLevel.Name = "beginnerLevel";
             this.beginnerLevel.Size = new System.Drawing.Size(91, 23);
             this.beginnerLevel.TabIndex = 7;
-            this.beginnerLevel.TabStop = true;
             this.beginnerLevel.Text = "Новичок";
             this.beginnerLevel.UseVisualStyleBackColor = true;
             // 
@@ -121,9 +114,9 @@
             this.startGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startGame.Font = new System.Drawing.Font("Rubik", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startGame.ForeColor = System.Drawing.Color.White;
-            this.startGame.Location = new System.Drawing.Point(66, 289);
+            this.startGame.Location = new System.Drawing.Point(66, 379);
             this.startGame.Name = "startGame";
-            this.startGame.Size = new System.Drawing.Size(201, 46);
+            this.startGame.Size = new System.Drawing.Size(201, 50);
             this.startGame.TabIndex = 10;
             this.startGame.Text = "Начать игру";
             this.startGame.UseVisualStyleBackColor = false;
@@ -138,9 +131,9 @@
             this.recordsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.recordsButton.Font = new System.Drawing.Font("Rubik", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.recordsButton.ForeColor = System.Drawing.Color.White;
-            this.recordsButton.Location = new System.Drawing.Point(88, 349);
+            this.recordsButton.Location = new System.Drawing.Point(88, 439);
             this.recordsButton.Name = "recordsButton";
-            this.recordsButton.Size = new System.Drawing.Size(158, 40);
+            this.recordsButton.Size = new System.Drawing.Size(158, 44);
             this.recordsButton.TabIndex = 10;
             this.recordsButton.Text = "Рекорды";
             this.recordsButton.UseVisualStyleBackColor = false;
@@ -161,19 +154,73 @@
             this.closeButton.MouseEnter += new System.EventHandler(this.closeButton_MouseEnter);
             this.closeButton.MouseLeave += new System.EventHandler(this.closeButton_MouseLeave);
             // 
+            // classic_mode
+            // 
+            this.classic_mode.AutoSize = true;
+            this.classic_mode.Checked = true;
+            this.classic_mode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.classic_mode.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.classic_mode.Location = new System.Drawing.Point(33, 26);
+            this.classic_mode.Margin = new System.Windows.Forms.Padding(2);
+            this.classic_mode.Name = "classic_mode";
+            this.classic_mode.Size = new System.Drawing.Size(136, 23);
+            this.classic_mode.TabIndex = 7;
+            this.classic_mode.TabStop = true;
+            this.classic_mode.Text = "Классический";
+            this.classic_mode.UseVisualStyleBackColor = true;
+            // 
+            // even_odd_mode
+            // 
+            this.even_odd_mode.AutoSize = true;
+            this.even_odd_mode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.even_odd_mode.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.even_odd_mode.Location = new System.Drawing.Point(48, 47);
+            this.even_odd_mode.Margin = new System.Windows.Forms.Padding(2);
+            this.even_odd_mode.Name = "even_odd_mode";
+            this.even_odd_mode.Size = new System.Drawing.Size(105, 23);
+            this.even_odd_mode.TabIndex = 6;
+            this.even_odd_mode.Text = "Чет-нечет";
+            this.even_odd_mode.UseVisualStyleBackColor = true;
+            // 
+            // Mode
+            // 
+            this.Mode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Mode.Controls.Add(this.classic_mode);
+            this.Mode.Controls.Add(this.even_odd_mode);
+            this.Mode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Mode.Font = new System.Drawing.Font("Rubik", 14F);
+            this.Mode.Location = new System.Drawing.Point(67, 119);
+            this.Mode.Name = "Mode";
+            this.Mode.Size = new System.Drawing.Size(200, 80);
+            this.Mode.TabIndex = 11;
+            this.Mode.TabStop = false;
+            this.Mode.Text = "Режим";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.IntermediateLevel);
+            this.groupBox1.Controls.Add(this.beginnerLevel);
+            this.groupBox1.Controls.Add(this.AdvancedLevel);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.Font = new System.Drawing.Font("Rubik", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox1.Location = new System.Drawing.Point(67, 273);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Уровень";
+            // 
             // NewGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(334, 407);
+            this.ClientSize = new System.Drawing.Size(334, 506);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.Mode);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.recordsButton);
             this.Controls.Add(this.startGame);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.AdvancedLevel);
-            this.Controls.Add(this.IntermediateLevel);
-            this.Controls.Add(this.beginnerLevel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.inputName);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
@@ -183,6 +230,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewGameForm";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.NewGameForm_Paint);
+            this.Mode.ResumeLayout(false);
+            this.Mode.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,12 +242,15 @@
         #endregion
         public System.Windows.Forms.TextBox inputName;
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton AdvancedLevel;
         private System.Windows.Forms.RadioButton IntermediateLevel;
         private System.Windows.Forms.RadioButton beginnerLevel;
         public System.Windows.Forms.Button startGame;
         public System.Windows.Forms.Button recordsButton;
         private System.Windows.Forms.Label closeButton;
+        private System.Windows.Forms.RadioButton classic_mode;
+        private System.Windows.Forms.RadioButton even_odd_mode;
+        private System.Windows.Forms.GroupBox Mode;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

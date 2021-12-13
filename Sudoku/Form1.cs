@@ -11,21 +11,22 @@ namespace Sudoku
     {
         private bool isActive = false, error_prevention = false, notes = false;
         private int s, m, h, ms;
-        private string playerName;
+        private string playerName, mode;
         private int flagForNameFile;
-        public Form1(string playerName, int hintsCount)
+        public Form1(string playerName, int hintsCount, string mode)
         {
             InitializeComponent();
+
+            this.playerName = playerName;
+            this.mode = mode;
+
+            flagForNameFile = hintsCount;
 
             createCells();
 
             playSoundtrack(true);
 
             startNewGame(hintsCount);
-
-            this.playerName = playerName;
-
-            flagForNameFile = hintsCount;
         }
 
         NewGameForm startingTheGame = new NewGameForm();
@@ -38,8 +39,8 @@ namespace Sudoku
 
         private void createCells()
         {
-            var firstColor = Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(249)))), ((int)(((byte)(187)))));
-            var secondColor = Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(255)))), ((int)(((byte)(99)))));
+            var firstColor = Color.FromArgb(((byte)(229)), ((int)(((byte)(249)))), ((int)(((byte)(187)))));
+            var secondColor = Color.FromArgb(183, 255, 99);
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -50,7 +51,10 @@ namespace Sudoku
                     cells[i, j].Size = new Size(51, 51);
                     cells[i, j].ForeColor = SystemColors.ControlDarkDark;
                     cells[i, j].Location = new Point(i * 51, j * 51);
-                    cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? firstColor : Color.White;
+                    if (mode == "classic")
+                        cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? Color.LightGreen : Color.White;
+                    else
+                        cells[i, j].BackColor = Color.White;
                     cells[i, j].FlatStyle = FlatStyle.Flat;
                     cells[i, j].FlatAppearance.BorderColor = Color.Black;
                     cells[i, j].X = i;
@@ -78,7 +82,6 @@ namespace Sudoku
             foreach (Label l in cell.Controls.OfType<Label>())
             {
                 listLabel[i] = l;
-                l.MouseEnter += new System.EventHandler(cells_MouseEnter); ;
                 i++;
             }
 
@@ -95,8 +98,19 @@ namespace Sudoku
                         cell.Text = value.ToString();
                         cell.ForeColor = Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(47)))), ((int)(((byte)(175)))));
                         for (int notes = 0; notes < 9; notes++)
-                            listLabel[notes].Text = "";
-                        
+                        {
+                            try
+                            {
+                                if (listLabel[notes].Text == null)
+                                    continue;
+                                listLabel[notes].Text = "";
+                            }
+                            catch (NullReferenceException ea)
+                            {
+                            }
+                        }
+
+                        //MessageBox.Show(listLabel.ToString());
                     }
                 }
                 else
@@ -118,8 +132,11 @@ namespace Sudoku
                         else
                         {
                             cell.Text = value.ToString();
-                            for (int notes = 0; notes < 9; notes++)
-                                listLabel[notes].Text = "";
+                            if (notes)
+                            {
+                                for (int notes = 0; notes < 9; notes++)
+                                    listLabel[notes].Text = "";
+                            }
                         }
                         cell.ForeColor = Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
                     }
@@ -134,6 +151,9 @@ namespace Sudoku
             isActive = true; // запускаем таймер
 
             showRandomValuesHints(hintsCount);
+
+            if (mode == "even_odd")
+                even_odd_mode();
         }
 
         private void showRandomValuesHints(int hintsCount)
@@ -151,36 +171,34 @@ namespace Sudoku
                 cells[rX, rY].ForeColor = Color.Black;
                 cells[rX, rY].IsLocked = true;
             }
-            initNotes(); // загружаем заметки для ячеек, которые !IsLocked
         }
 
-        private void initNotes()
+        private void tt(SudokuCell cell)
         {
             // В цикле пробегаемся по каждой ячейке поля, если она !IsLocked загружаем в нее 9 лейблов для заметок
-            for (int i = 0; i < 9; i++)
+            for (int k = 0; k < 3; k++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int l = 0; l < 3; l++)
                 {
-                    for (int k = 0; k < 3; k++)
-                    {
-                        for (int l = 0; l < 3; l++)
-                        {
-                            if (!cells[i, j].IsLocked)
-                            {
-                                values[k, l] = new ValuesLabel();
-                                values[k, l].Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                                values[k, l].Size = new Size(17, 17);
-                                values[k, l].Location = new Point(k * 17, l * 17);
-                                values[k, l].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                                values[k, l].Enabled = false;
-                                values[k, l].ForeColor = System.Drawing.SystemColors.ControlText;
-                                values[k, l].BackColor = Color.Transparent;
-                                cells[i, j].Controls.Add(values[l, k]);
-                            }
-                        }
-                    }
+
+                    values[k, l] = new ValuesLabel();
+                    values[k, l].Font = new System.Drawing.Font("Rubik", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                    values[k, l].Size = new Size(17, 17);
+                    values[k, l].Location = new Point(k * 17, l * 17);
+                    values[k, l].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                    values[k, l].Enabled = false;
+                    values[k, l].BackColor = Color.Transparent;
+                    cell.Controls.Add(values[l, k]);
                 }
             }
+
+            /*int ias = 0;
+            foreach (Label l in cells[0, 0].Controls.OfType<Label>())
+            {
+                ias++;
+            }
+            MessageBox.Show(ias.ToString());*/
+
         }
 
         private void loadValues()
@@ -190,6 +208,7 @@ namespace Sudoku
             {
                 cell.Value = 0;
                 cell.Clear();
+                tt(cell);
             }
 
             // Этот метод будет вызываться рекурсивно,
@@ -290,18 +309,33 @@ namespace Sudoku
                 // --------------для теста-----------
                 //playSoundtrack(false);
                 playSimpleSound("tada.wav");
-                MessageBox.Show($"{playerName}, Вы победили!\nВаше время: {txtTimer.Text}");
+                //MessageBox.Show($"{playerName}, Вы победили!\nВаше время: {txtTimer.Text}");
                 setRecord();
                 // --------------для теста-----------
             }
             else
             {
                 playSoundtrack(false);
+                setRecord();
                 this.Hide();
                 startingTheGame.Show();
+                MessageBox.Show($"{playerName}, Вы победили!\nВаше время: {txtTimer.Text}");
                 resetTimer();
-                MessageBox.Show($"{playerName}, Вы победили!\nВаше время: {txtTimer.Text}"); ///////////////////
-                setRecord();////////////////////////////
+            }
+        }
+
+        private void even_odd_mode()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (isValidNumber(cells[i, j].Value, i, j) && cells[i, j].Value % 2 == 0)
+                    {
+                        cells[i, j].BackColor = Color.LightGreen;
+                    }
+
+                }
             }
         }
 
@@ -415,14 +449,14 @@ namespace Sudoku
             Application.Exit();
         }
 
-        private void cells_MouseEnter(object sender, EventArgs e)
+        /*private void cells_MouseEnter(object sender, EventArgs e)
         {
             foreach (Label l in cells[1, 1].Controls.OfType<Label>())
             {
                 l.BackColor = Color.Black;
             }
             values[1, 1].BackColor = Color.Red;
-        }
+        }*/
 
         private void closeButton_MouseEnter(object sender, EventArgs e)
         {
@@ -446,7 +480,7 @@ namespace Sudoku
             {
                 soundtrack.URL = "soundtrack.mp3";
                 soundtrack.settings.setMode("loop", true);
-                soundtrack.settings.volume = 2;
+                soundtrack.settings.volume = 100;
                 soundtrack.Ctlcontrols.play();
             }
             else

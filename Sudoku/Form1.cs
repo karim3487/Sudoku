@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Windows.Forms;
@@ -41,16 +42,21 @@ namespace Sudoku
         {
             var firstColor = Color.FromArgb(((byte)(229)), ((int)(((byte)(249)))), ((int)(((byte)(187)))));
             var secondColor = Color.FromArgb(183, 255, 99);
+            var offsetV = 0; 
+            var offsetH = 0;
             for (int i = 0; i < 9; i++)
             {
+                offsetV = i == 3 || i == 6 ? offsetV + 2 : offsetV;
+                offsetH = 0;
                 for (int j = 0; j < 9; j++)
                 {
+                    offsetH = j == 3 || j == 6 ? offsetH + 2 : offsetH;
                     // Создаем 81 ячейку со стилями и местоположениями на основе индекса
                     cells[i, j] = new SudokuCell();
                     cells[i, j].Font = new Font(SystemFonts.DefaultFont.FontFamily, 25);
                     cells[i, j].Size = new Size(51, 51);
                     cells[i, j].ForeColor = SystemColors.ControlDarkDark;
-                    cells[i, j].Location = new Point(i * 51, j * 51);
+                    cells[i, j].Location = new Point(i * 51 + offsetV, j * 51 + offsetH);
                     if (mode == "classic")
                         cells[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? Color.LightGreen : Color.White;
                     else
@@ -334,7 +340,6 @@ namespace Sudoku
                     {
                         cells[i, j].BackColor = Color.LightGreen;
                     }
-
                 }
             }
         }
@@ -423,6 +428,26 @@ namespace Sudoku
             }
         }
 
+        private void save_button_Click(object sender, EventArgs e)
+        {
+            /*string writePath = @"F:\test.txt";
+            Dictionary<>;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    //if (cells[j, i].Text == "")
+                    //    matrix += "0";
+                    matrix += cells[j, i].Value.ToString();
+                }
+                matrix += "\n";
+            }
+            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+            {
+                sw.Write(matrix);
+            }*/
+        }
+
         private void errorPreventionMode_Click(object sender, EventArgs e)
         {
             playSimpleSound("Windows Navigation Start.wav");
@@ -448,15 +473,6 @@ namespace Sudoku
             Application.DoEvents();
             Application.Exit();
         }
-
-        /*private void cells_MouseEnter(object sender, EventArgs e)
-        {
-            foreach (Label l in cells[1, 1].Controls.OfType<Label>())
-            {
-                l.BackColor = Color.Black;
-            }
-            values[1, 1].BackColor = Color.Red;
-        }*/
 
         private void closeButton_MouseEnter(object sender, EventArgs e)
         {

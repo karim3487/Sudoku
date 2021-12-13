@@ -43,15 +43,17 @@ namespace Sudoku
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.soundtrack = new AxWMPLib.AxWindowsMediaPlayer();
+            this.save_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.soundtrack)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Location = new System.Drawing.Point(29, 28);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(459, 459);
+            this.panel1.Size = new System.Drawing.Size(463, 463);
             this.panel1.TabIndex = 0;
             // 
             // newGameButton
@@ -187,12 +189,23 @@ namespace Sudoku
             this.soundtrack.TabIndex = 13;
             this.soundtrack.Visible = false;
             // 
+            // save_button
+            // 
+            this.save_button.Location = new System.Drawing.Point(518, 271);
+            this.save_button.Name = "save_button";
+            this.save_button.Size = new System.Drawing.Size(102, 64);
+            this.save_button.TabIndex = 14;
+            this.save_button.Text = "Сохранить";
+            this.save_button.UseVisualStyleBackColor = true;
+            this.save_button.Click += new System.EventHandler(this.save_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Sudoku.Resource1.backTest;
             this.ClientSize = new System.Drawing.Size(663, 543);
+            this.Controls.Add(this.save_button);
             this.Controls.Add(this.soundtrack);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.checkBox1);
@@ -230,5 +243,6 @@ namespace Sudoku
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Splitter splitter1;
         private AxWMPLib.AxWindowsMediaPlayer soundtrack;
+        private System.Windows.Forms.Button save_button;
     }
 }

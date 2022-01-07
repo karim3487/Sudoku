@@ -25,27 +25,32 @@ namespace Sudoku
 
         }
 
-        ValuesLabel[,] cells = new ValuesLabel[COL, ROW];
+        Notes[,] cells = new Notes[COL, ROW];
 
         Records records = new Records();
 
         private void createCells()
         {
-            //var firstColor = Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(203)))), ((int)(((byte)(139)))));
-            var firstColor = Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(232)))), ((int)(((byte)(139)))));
+            var firstColor = Color.FromArgb(195, 232, 139);
+            var offsetV = 0;
+            var offsetH = 0;
             for (int i = 0; i < COL; i++)
             {
+                offsetV += 1;
+                offsetV = i % 2 == 0 ? offsetV + 3 : offsetV;
+                offsetH = 0;
                 for (int j = 0; j < ROW; j++)
                 {
-                    cells[i, j] = new ValuesLabel();
+                    offsetH = j == 0 || j == 11 ? offsetH + 4 : offsetH + 1;
+                    cells[i, j] = new Notes();
                     cells[i, j].Font = new Font(SystemFonts.DefaultFont.FontFamily, 20);
-                    cells[i, j].Size = new Size(200, 40);
-                    cells[i, j].Location = new Point(i * 200, j * 40);
-                    cells[i, j].BorderStyle = BorderStyle.Fixed3D;
+                    cells[i, j].Size = new Size(120, 30);
+                    cells[i, j].Location = new Point(i * 120 + offsetV, j * 30 + offsetH);
+                    cells[i, j].BorderStyle = BorderStyle.None;
                     cells[i, j].TextAlign = ContentAlignment.MiddleCenter;
                     cells[i, j].BackColor = ((i / 2) + (j / 1)) % 2 == 0 ? firstColor : Color.WhiteSmoke;
                     cells[i, j].FlatStyle = FlatStyle.Flat;
-                    cells[i, j].Font = new Font("Rubik", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(200)));
+                    cells[i, j].Font = new Font("Rubik", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(200)));
 
                     panel1.Controls.Add(cells[i, j]);
                 }
@@ -53,8 +58,8 @@ namespace Sudoku
             cells[0, 0].Text = cells[2, 0].Text = cells[4, 0].Text = "Имя";
             cells[1, 0].Text = cells[3, 0].Text = cells[5, 0].Text = "Время";
 
-            cells[0, 0].Font = cells[2, 0].Font = cells[4, 0].Font = new Font("Rubik", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(200)));
-            cells[1, 0].Font = cells[3, 0].Font = cells[5, 0].Font = new Font("Rubik", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(200)));
+            cells[0, 0].Font = cells[2, 0].Font = cells[4, 0].Font = new Font("Rubik", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 200);
+            cells[1, 0].Font = cells[3, 0].Font = cells[5, 0].Font = new Font("Rubik", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 200);
         }
 
         private void printAllRecords()

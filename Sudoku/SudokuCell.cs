@@ -1,11 +1,24 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Sudoku
 {
     class SudokuCell : Button
     {
+        public SudokuCell(int size, Point location)
+        {
+            this.Font = new Font(SystemFonts.DefaultFont.FontFamily, 25);
+            this.FlatStyle = FlatStyle.Flat;
+            this.FlatAppearance.BorderColor = Color.Black;
+            this.ForeColor = SystemColors.ControlDarkDark;
+            this.Size = new Size(size, size);
+            this.Location = location;
+
+        }
+
         public int Value { get; set; }
         public bool IsLocked { get; set; }
+        public bool IsFilled { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -13,29 +26,15 @@ namespace Sudoku
         {
             this.Text = string.Empty;
             this.IsLocked = false;
+            this.IsFilled = false;
         }
     }
 
-    class ValuesLabel : Label
+    class Notes : Label
     {
         public int Value { get; set; }
         public bool IsLocked { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
 
-        public int[,] array = { { 1, 4, 7 }, { 2, 5, 8 }, { 3, 6, 9 } };
-
-        new bool Enabled { 
-            set
-            {
-                this.ForeColor = System.Drawing.Color.Green;
-            } 
-        }
-        public void Clear()
-        {
-            this.Text = string.Empty;
-            this.IsLocked = false;
-        }
     }
 
 }

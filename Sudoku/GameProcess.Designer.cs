@@ -2,7 +2,7 @@
 
 namespace Sudoku
 {
-    partial class Form1
+    partial class GameProcess
     {
         /// <summary>
         /// Required designer variable.
@@ -31,8 +31,9 @@ namespace Sudoku
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameProcess));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.newGameButton = new System.Windows.Forms.Button();
             this.checkButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
@@ -43,27 +44,42 @@ namespace Sudoku
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.soundtrack = new AxWMPLib.AxWindowsMediaPlayer();
-            this.save_button = new System.Windows.Forms.Button();
+            this.pause_button = new System.Windows.Forms.Button();
+            this.resume_button = new System.Windows.Forms.Button();
+            this.animation_timer = new System.Windows.Forms.Timer(this.components);
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.soundtrack)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(29, 28);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(463, 463);
             this.panel1.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(124, 144);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(212, 174);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // newGameButton
             // 
-            this.newGameButton.BackColor = System.Drawing.Color.Lime;
+            this.newGameButton.BackColor = System.Drawing.Color.LimeGreen;
             this.newGameButton.FlatAppearance.BorderSize = 0;
             this.newGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newGameButton.Font = new System.Drawing.Font("Rubik", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newGameButton.ForeColor = System.Drawing.Color.Black;
-            this.newGameButton.Location = new System.Drawing.Point(517, 411);
+            this.newGameButton.Location = new System.Drawing.Point(521, 424);
             this.newGameButton.Margin = new System.Windows.Forms.Padding(2);
             this.newGameButton.Name = "newGameButton";
             this.newGameButton.Size = new System.Drawing.Size(119, 67);
@@ -123,7 +139,7 @@ namespace Sudoku
             // 
             // txtTimer
             // 
-            this.txtTimer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(238)))), ((int)(((byte)(203)))));
+            this.txtTimer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(237)))), ((int)(((byte)(179)))));
             this.txtTimer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTimer.Font = new System.Drawing.Font("Rubik", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtTimer.Location = new System.Drawing.Point(518, 158);
@@ -136,7 +152,7 @@ namespace Sudoku
             // timer
             // 
             this.timer.Enabled = true;
-            this.timer.Interval = 10;
+            this.timer.Interval = 1;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // errorPreventionMode
@@ -182,30 +198,41 @@ namespace Sudoku
             // soundtrack
             // 
             this.soundtrack.Enabled = true;
-            this.soundtrack.Location = new System.Drawing.Point(536, 502);
+            this.soundtrack.Location = new System.Drawing.Point(545, 483);
             this.soundtrack.Name = "soundtrack";
             this.soundtrack.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("soundtrack.OcxState")));
             this.soundtrack.Size = new System.Drawing.Size(75, 23);
             this.soundtrack.TabIndex = 13;
             this.soundtrack.Visible = false;
             // 
-            // save_button
+            // pause_button
             // 
-            this.save_button.Location = new System.Drawing.Point(518, 271);
-            this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(102, 64);
-            this.save_button.TabIndex = 14;
-            this.save_button.Text = "Сохранить";
-            this.save_button.UseVisualStyleBackColor = true;
-            this.save_button.Click += new System.EventHandler(this.save_button_Click);
+            this.pause_button.Location = new System.Drawing.Point(536, 186);
+            this.pause_button.Name = "pause_button";
+            this.pause_button.Size = new System.Drawing.Size(84, 23);
+            this.pause_button.TabIndex = 15;
+            this.pause_button.Text = "Пауза";
+            this.pause_button.UseVisualStyleBackColor = true;
+            this.pause_button.Click += new System.EventHandler(this.pause_button_Click);
+            // 
+            // resume_button
+            // 
+            this.resume_button.Location = new System.Drawing.Point(536, 185);
+            this.resume_button.Name = "resume_button";
+            this.resume_button.Size = new System.Drawing.Size(84, 23);
+            this.resume_button.TabIndex = 15;
+            this.resume_button.Text = "Продолжить";
+            this.resume_button.UseVisualStyleBackColor = true;
+            this.resume_button.Click += new System.EventHandler(this.resume_button_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Sudoku.Resource1.backTest;
+            this.BackgroundImage = global::Sudoku.Resource1.bg;
             this.ClientSize = new System.Drawing.Size(663, 543);
-            this.Controls.Add(this.save_button);
+            this.Controls.Add(this.pause_button);
+            this.Controls.Add(this.resume_button);
             this.Controls.Add(this.soundtrack);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.checkBox1);
@@ -224,6 +251,8 @@ namespace Sudoku
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sudoku";
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.soundtrack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -243,6 +272,9 @@ namespace Sudoku
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Splitter splitter1;
         private AxWMPLib.AxWindowsMediaPlayer soundtrack;
-        private System.Windows.Forms.Button save_button;
+        private System.Windows.Forms.Button pause_button;
+        private System.Windows.Forms.Button resume_button;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Timer animation_timer;
     }
 }

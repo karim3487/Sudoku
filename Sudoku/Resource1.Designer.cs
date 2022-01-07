@@ -63,9 +63,9 @@ namespace Sudoku {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap backTest {
+        public static System.Drawing.Bitmap bg {
             get {
-                object obj = ResourceManager.GetObject("backTest", resourceCulture);
+                object obj = ResourceManager.GetObject("bg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -77,16 +77,6 @@ namespace Sudoku {
             get {
                 object obj = ResourceManager.GetObject("SUDOKU", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
-        public static byte[] test {
-            get {
-                object obj = ResourceManager.GetObject("test", resourceCulture);
-                return ((byte[])(obj));
             }
         }
     }

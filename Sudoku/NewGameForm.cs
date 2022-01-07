@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -57,7 +58,7 @@ namespace Sudoku
                 hintsCount = 15;
             if (hintsCount != 0 && inputName.Text != "")
             {
-                Form1 game = new Form1(inputName.Text, hintsCount, mode);
+                GameProcess game = new GameProcess(inputName.Text, hintsCount, mode);
                 this.Hide();
                 game.Show();
             }
@@ -76,6 +77,14 @@ namespace Sudoku
             records.Show();
         }
 
+        private void rules_button_Click(object sender, EventArgs e)
+        {
+            playSimpleSound("Windows Navigation Start.wav");
+
+            Rules rules = new Rules();
+            rules.Show();
+        }
+
         private void NewGameForm_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -88,5 +97,7 @@ namespace Sudoku
             SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\" + filename);
             simpleSound.Play();
         }
+
+        
     }
 }
